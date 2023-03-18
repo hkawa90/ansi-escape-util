@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ANSI ESCAPE UTIL</title>
+  <style>
+    body {
+      font-size: 0.7em;
+    }
+    .box {
+      border: 2px solid #0094D6;
+    }
+
+    .box h5 {
+      background: #0094D6;
+      color: #FFF;
+      text-align: left;
+      margin: 0;
+    }
+
+    .box .inner {
+      padding: .5em;
+    }
+
+    textarea {
+      width: 100%;
+      height: auto;
+    }
+
+    .blink {
+      filter: invert(0%);
+      animation: blinkAnime 0.5s infinite alternate;
+    }
+
+    @keyframes blinkAnime {
+      0% {
+        filter: invert(0%)
+      }
+      100% {
+        filter: invert(100%)
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <h3>ANSI ESCAPE UTIL DEMO</span>
+  </h3>
+  <pre>Input ANSI escape buid command</pre>
+  <div><textarea rows="15"
+      id="src">BOLD;STR(Over 20 years );RESET;STR(after its introduction to the programming community, );ITALIC;STR(JavaScript);RESET;STR( is now one of the most );FORE_COLOR(GREEN);STR(widespread );FORE_COLOR(blue);STR(cross-platform );BLINKING;
+STR(languages ever created.);RESET;
+BOLD;STR(BOLD);RESET;
+BLINKING;STR(BLINKING);RESET;
+HIBLINKING;STR(HIBLINKING);RESET;
+UNDERLINE;STR(UNDERLINE);RESET;
+ITALIC;STR(ITALIC);RESET;
+STRIKETHROUGH;STR(STRIKETHROUGH);RESET;
+HIDDEN;STR(HIDDEN);RESET;
+REVERSE;STR(REVERSE);RESET;
+DIM;STR(DIM);RESET;
+FORE_RGB_COLOR(255,128,0);BACK_RGB_COLOR(0,128,255);STR(COLORFULE STRING);RESET;STR(RESET);
+BOLD;ITALIC;STR(BOLDITALIC);RESET;
+</textarea></div>
+  <br />
+  <input id="exec" type="button" value="Exec" /><br />
+  <div class="box">
+    <h5>ansi_escape() API example(Build ANSI Escape):</h3>
+      <div class="inner" id="bansi"></div>
+  </div>
+  <div class="box">
+    <h5>ansi2html() API example(Converted to HTML(raw HTML code)):</h3>
+      <div class="inner" id="ohtml"></div>
+  </div>
+  <div class="box">
+    <h5>ansi2html() API example(Converted to HTML):</h3>
+      <div class="inner" id="converted"></div>
+  </div>
+  <div class="box">
+    <h5>ansi_escape_remover() API example(Removed ANSI ESCAPE String):</h3>
+      <div class="inner" id="removed"></div>
+  </div>
+
+  <script type="module">
+    import { ansi_escape, ansi2html, ansi_escape_remover } from '../dist/ansi-escape-util.es.js'
+    function ansiescape() {
+      const input = document.getElementById('src').value
+
+      const ansiescaped = ansi_escape(input, true)
+      const ohtml = ansi2html(ansiescaped)
+      document.getElementById('bansi').innerText = new TextDecoder().decode(ansiescaped)
+      document.getElementById('ohtml').innerText = ohtml
+      document.getElementById('converted').innerHTML = ohtml
+      document.getElementById('removed').innerHTML = ansi_escape_remover(ansiescaped)
+    }
+    document.addEventListener('DOMContentLoaded', async function () {
+      const btn = document.getElementById('exec')
+      btn.addEventListener('click', ansiescape)
+    })
+  </script>
+  <script></script>
+</body>
+
+</html>

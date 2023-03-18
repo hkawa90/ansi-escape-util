@@ -1,0 +1,29 @@
+{
+  "name": "ansi-escape-util",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./dist/ansi-escape-util.umd.cjs",
+  "module": "./dist/ansi-escape-util.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/ansi-escape-util.js",
+      "require": "./dist/ansi-escape-util.umd.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@types/node": "^18.14.6",
+    "typescript": "^4.9.3",
+    "vite": "^4.1.0",
+    "vite-plugin-dts": "^2.0.2"
+  }
+}
